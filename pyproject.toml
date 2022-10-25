@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "topmostp"
+version = "0.1.0"
+description = "A simple CLI tool to retrieve the N top most used ports"
+authors = ["SecSI <dev@secsi.io>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "topmostp"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.28.1"
+typer = {extras = ["all"], version = "^0.6.1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+topmostp = 'topmostp.main:app'
