@@ -28,7 +28,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.2 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.3 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
@@ -87,10 +87,10 @@ def update_ports():
     } for line in nmap_services.splitlines() if not line.startswith("#")]
     ordered_ports = sorted(structured_ports, key=lambda x: x["frequency"], reverse=True)
 
-    with open(get_config_file(), 'w') as ports_file:
+    with open(get_config_file(), 'w', newline='') as ports_file:
         writer = csv.writer(ports_file)
         for v in ordered_ports:
-            row = [v["service"].strip(), v["port"].strip(), v["frequency"].strip()]
+            row = [v["service"], v["port"], v["frequency"]]
             writer.writerow(row)
     success("Update completed!")
 
