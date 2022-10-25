@@ -28,7 +28,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.3 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.4 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
@@ -125,3 +125,23 @@ def port_info(port: int, port_type: str):
                 return
     # If reaches this point it means the port was not found
     err("Port not found")
+
+def find_services(service: str):
+    match_found = False
+    with open(get_config_file(), 'r') as ports_file:
+        csv_reader = csv.reader(ports_file, delimiter=',')
+        num_rows = len(ports_file.readlines())
+        ports_file.seek(0)
+        for i, row in enumerate(csv_reader):
+            s = row[0]
+            if service.lower() in s.lower():
+                match_found = True
+                success("Match found:")
+                print(f"{BOLD}Service:{END_C} {row[0]}", flush=True)
+                print(f"{BOLD}Port:{END_C} {row[1].split('/')[0]}", flush=True)
+                print(f"{BOLD}Type:{END_C} {row[1].split('/')[1].upper()}", flush=True)
+                print(f"{BOLD}Frequency:{END_C} {row[2]}", flush=True)
+                print(f"{BOLD}Ranking:{END_C} {i+1}/{num_rows}", flush=True)   
+
+    if not match_found:
+        err("No match found")

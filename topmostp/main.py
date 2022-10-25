@@ -54,3 +54,11 @@ def stats(port: int, port_type: helper.PortTypeArg):
     """
     intro()
     helper.port_info(port, port_type.value)
+
+@app.command()
+def find(service: str):
+    """
+        Find info about about a specific service
+    """
+    intro()
+    helper.find_services(service)
