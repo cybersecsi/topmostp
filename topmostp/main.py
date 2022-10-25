@@ -46,3 +46,12 @@ def udp(n: int, silent: bool = typer.Option(False, "--silent")):
         intro()
     ports = helper.get_ports(n, tcp=False, udp=True)
     print(",".join(ports))
+
+@app.command()
+def stats(port: int, port_type: helper.PortTypeArg):
+    """
+        Retrieve stats about a port
+    """
+    intro()
+    helper.port_info(port, port_type.value)
+

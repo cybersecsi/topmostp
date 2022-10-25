@@ -1,17 +1,22 @@
 from pathlib import Path
 from datetime import datetime
 from time import sleep
+from enum import Enum
 import os
 import requests
 import csv
 
 # Vars
 NMAP_SERVICE_SOURCE = "https://raw.githubusercontent.com/nmap/nmap/master/nmap-services" # We use the 'nmap-services' file to get the list of ports
+class PortTypeArg(str, Enum):
+    tcp = "tcp"
+    udp = "udp"
 
 # Colors
 SUCCESS_C = '\033[92m'
 DEBUG_C = '\033[93m'
 ERROR_C = '\033[91m'
+BOLD = '\033[1m'
 END_C = '\033[0m'
 
 def banner():
@@ -23,7 +28,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.0 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.1 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
@@ -40,6 +45,9 @@ def err(msg):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     print(f"{ERROR_C}[{current_time}] - [ERROR] - {msg}{END_C}", flush=True)
+
+def bold(msg):
+    print(f"{BOLD}{msg}{END_C}", flush=True)
 
 def get_config_file():
     home_folder = Path.home()
@@ -72,13 +80,17 @@ def update_ports():
 
     nmap_services = nmap_services_res.text
 
-    structured_ports = [{'port': line.split()[1], 'frequency': line.split()[2]} for line in nmap_services.splitlines() if not line.startswith("#")]
+    structured_ports = [{
+        'service': line.split()[0], 
+        'port': line.split()[1], 
+        'frequency': line.split()[2]
+    } for line in nmap_services.splitlines() if not line.startswith("#")]
     ordered_ports = sorted(structured_ports, key=lambda x: x["frequency"], reverse=True)
 
     with open(get_config_file(), 'w') as ports_file:
         writer = csv.writer(ports_file)
         for v in ordered_ports:
-            row = [v["port"], v["frequency"]]
+            row = [v["service"], v["port"], v["frequency"]]
             writer.writerow(row)
     success("Update completed!")
 
@@ -87,13 +99,29 @@ def get_ports(n: int, tcp: bool, udp: bool):
     with open(get_config_file(), 'r') as ports_file:
         csv_reader = csv.reader(ports_file, delimiter=',')
         for row in csv_reader:
-            port_type = row[0].split("/")[1]
+            port_type = row[1].split("/")[1]
             # Add port to the list
             if port_type == "tcp" and tcp:
-                ports_list.append(row[0].split("/")[0])
+                ports_list.append(row[1].split("/")[0])
             elif port_type == "udp" and udp:
-                ports_list.append(row[0].split("/")[0])
+                ports_list.append(row[1].split("/")[0])
             # Check if n is reached
             if n == len(ports_list):
                 break   
     return ports_list
+
+def port_info(port: int, port_type: str):
+    with open(get_config_file(), 'r') as ports_file:
+        csv_reader = csv.reader(ports_file, delimiter=',')
+        num_rows = len(ports_file.readlines())
+        ports_file.seek(0)
+        for i, row in enumerate(csv_reader):
+            if int(row[1].split("/")[0]) == port and row[1].split("/")[1] == port_type:
+                print(f"{BOLD}Service:{END_C} {row[0]}", flush=True)
+                print(f"{BOLD}Port:{END_C} {row[1].split('/')[0]}", flush=True)
+                print(f"{BOLD}Type:{END_C} {row[1].split('/')[1].upper()}", flush=True)
+                print(f"{BOLD}Frequency:{END_C} {row[2]}", flush=True)
+                print(f"{BOLD}Ranking:{END_C} {i+1}/{num_rows}", flush=True)
+                return
+    # If reaches this point it means the port was not found
+    err("Port not found")

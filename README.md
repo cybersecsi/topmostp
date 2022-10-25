@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-    <img src="https://raw.githubusercontent.com/cybersecsi/topmostp/main/assets/logo.png" alt= "topmostp" width="300px">
+    <img src="https://raw.githubusercontent.com/cybersecsi/topmostp/main/logo.png" alt= "topmostp" width="300px">
 </h1>
 <p align="center">
     <b>topmostp</b>
