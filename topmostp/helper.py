@@ -28,7 +28,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.1 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.2 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
@@ -90,7 +90,7 @@ def update_ports():
     with open(get_config_file(), 'w') as ports_file:
         writer = csv.writer(ports_file)
         for v in ordered_ports:
-            row = [v["service"], v["port"], v["frequency"]]
+            row = [v["service"].strip(), v["port"].strip(), v["frequency"].strip()]
             writer.writerow(row)
     success("Update completed!")
 

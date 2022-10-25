@@ -54,4 +54,3 @@ def stats(port: int, port_type: helper.PortTypeArg):
     """
     intro()
     helper.port_info(port, port_type.value)
-
