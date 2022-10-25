@@ -11,6 +11,7 @@ NMAP_SERVICE_SOURCE = "https://raw.githubusercontent.com/nmap/nmap/master/nmap-s
 class PortTypeArg(str, Enum):
     tcp = "tcp"
     udp = "udp"
+    sctp = "sctp"
 
 # Colors
 SUCCESS_C = '\033[92m'
@@ -28,7 +29,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.4 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.5 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
@@ -94,7 +95,7 @@ def update_ports():
             writer.writerow(row)
     success("Update completed!")
 
-def get_ports(n: int, tcp: bool, udp: bool):
+def get_ports(n: int, tcp: bool, udp: bool, sctp: bool):
     ports_list = []
     with open(get_config_file(), 'r') as ports_file:
         csv_reader = csv.reader(ports_file, delimiter=',')
@@ -105,7 +106,11 @@ def get_ports(n: int, tcp: bool, udp: bool):
                 ports_list.append(row[1].split("/")[0])
             elif port_type == "udp" and udp:
                 ports_list.append(row[1].split("/")[0])
-            # Check if n is reached
+            elif port_type == "sctp" and sctp:
+                ports_list.append(row[1].split("/")[0])
+            # Check if n is reached, remove duplicates and recheck (ugly but more performant)
+            if n == len(ports_list):
+                ports_list = list(dict.fromkeys(ports_list))
             if n == len(ports_list):
                 break   
     return ports_list

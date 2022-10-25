@@ -20,11 +20,11 @@ def update():
 @app.command()
 def all(n: int, silent: bool = typer.Option(False, "--silent")):
     """
-        Retrieve list of all ports (both TCP and UDP) by frequency
+        Retrieve list of all ports (both TCP, UDP and SCTP) by frequency
     """
     if not silent:
         intro()
-    ports = helper.get_ports(n, tcp=True, udp=True)
+    ports = helper.get_ports(n, tcp=True, udp=True, sctp=True)
     print(",".join(ports))
 
 @app.command()
@@ -34,7 +34,7 @@ def tcp(n: int, silent: bool = typer.Option(False, "--silent")):
     """
     if not silent:
         intro()
-    ports = helper.get_ports(n, tcp=True, udp=False)
+    ports = helper.get_ports(n, tcp=True, udp=False, sctp=False)
     print(",".join(ports))
 
 @app.command()
@@ -44,7 +44,17 @@ def udp(n: int, silent: bool = typer.Option(False, "--silent")):
     """
     if not silent:
         intro()
-    ports = helper.get_ports(n, tcp=False, udp=True)
+    ports = helper.get_ports(n, tcp=False, udp=True, sctp=False)
+    print(",".join(ports))
+
+@app.command()
+def sctp(n: int, silent: bool = typer.Option(False, "--silent")):
+    """
+        Retrieve list of SCTP ports by frequency
+    """
+    if not silent:
+        intro()
+    ports = helper.get_ports(n, tcp=False, udp=False, sctp=True)
     print(",".join(ports))
 
 @app.command()
