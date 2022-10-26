@@ -38,20 +38,20 @@ topmostp --help
 This will display help for the tool. Here are all the switches it supports.
 
 ```
- Usage: topmostp [OPTIONS] COMMAND [ARGS]...                                                                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                                                                                              
-╭─ Options ─────────────────────────────────────────────────────────────────────────────────────-────╮
-│ --help          Show this message and exit.                                                        │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────╮
-│ all                             Retrieve list of all ports (both TCP, UDP and SCTP) by frequency   │
-│ find                            Find info about about a specific service                           │
-│ sctp                            Retrieve list of SCTP ports by frequency                           │
-│ stats                           Retrieve stats about a port                                        │
-│ tcp                             Retrieve list of TCP ports by frequency                            │
-│ udp                             Retrieve list of UDP ports by frequency                            │
-│ update                          Update ports list                                                  │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ Usage: topmostp [OPTIONS] COMMAND [ARGS]...                                      
+                                                                                  
+╭─ Options ──────────────────────────────────────────────────────────────────────╮
+│ --help       Show this message and exit.                                       │
+╰────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────╮
+│ all         Retrieve list of all ports (both TCP, UDP and SCTP) by frequency   │
+│ find        Find info about about a specific service                           │
+│ sctp        Retrieve list of SCTP ports by frequency                           │
+│ stats       Retrieve stats about a port                                        │
+│ tcp         Retrieve list of TCP ports by frequency                            │
+│ udp         Retrieve list of UDP ports by frequency                            │
+│ update      Update ports list                                                  │
+╰────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 A pratical example is the following:
