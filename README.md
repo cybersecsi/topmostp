@@ -56,7 +56,7 @@ A pratical example is the following:
 naabu -p $(topmostp top 15 -s) -host secsi.io
 ```
 
-In this snippet the output of ``topmostp`` is used to retrieve the list of the top 10 ports and it is chained with the ``naabu`` port scanning tool.
+In this snippet the output of ``topmostp`` is used to retrieve the list of the top 15 ports and it is chained with the ``naabu`` port scanning tool.
 
 
 ## Demo
