@@ -3,7 +3,7 @@
 import typer
 import topmostp.helper as helper
 
-app = typer.Typer(add_completion=False)
+app = typer.Typer(add_completion=False, context_settings={"help_option_names": ["-h", "--help"]})
 
 def intro():
     helper.banner()
@@ -18,42 +18,46 @@ def update():
     helper.update_ports()
 
 @app.command()
-def all(n: int, silent: bool = typer.Option(False, "--silent")):
+def all(n: int, silent: bool = typer.Option(False, "--silent", "-s")):
     """
         Retrieve list of all ports (both TCP, UDP and SCTP) by frequency
     """
     if not silent:
         intro()
+        print("You can hide the previous output with the silent option (-s or --silent)")   
     ports = helper.get_ports(n, tcp=True, udp=True, sctp=True)
     print(",".join(ports))
 
 @app.command()
-def tcp(n: int, silent: bool = typer.Option(False, "--silent")):
+def tcp(n: int, silent: bool = typer.Option(False, "--silent", "-s")):
     """
         Retrieve list of TCP ports by frequency
     """
     if not silent:
         intro()
+        print("You can hide the previous output with the silent option (-s or --silent)")
     ports = helper.get_ports(n, tcp=True, udp=False, sctp=False)
     print(",".join(ports))
 
 @app.command()
-def udp(n: int, silent: bool = typer.Option(False, "--silent")):
+def udp(n: int, silent: bool = typer.Option(False, "--silent", "-s")):
     """
         Retrieve list of UDP ports by frequency
     """
     if not silent:
         intro()
+        print("You can hide the previous output with the silent option (-s or --silent)")
     ports = helper.get_ports(n, tcp=False, udp=True, sctp=False)
     print(",".join(ports))
 
 @app.command()
-def sctp(n: int, silent: bool = typer.Option(False, "--silent")):
+def sctp(n: int, silent: bool = typer.Option(False, "--silent", "-s")):
     """
         Retrieve list of SCTP ports by frequency
     """
     if not silent:
         intro()
+        print("You can hide the previous output with the silent option (-s or --silent)")
     ports = helper.get_ports(n, tcp=False, udp=False, sctp=True)
     print(",".join(ports))
 

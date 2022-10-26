@@ -29,7 +29,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.5 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.6 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
