@@ -38,32 +38,29 @@ topmostp --help
 This will display help for the tool. Here are all the switches it supports.
 
 ```
- Usage: topmostp [OPTIONS] COMMAND [ARGS]...                                      
-                                                                                  
-╭─ Options ──────────────────────────────────────────────────────────────────────╮
-│ --help       Show this message and exit.                                       │
-╰────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ─────────────────────────────────────────────────────────────────────╮
-│ all         Retrieve list of all ports (both TCP, UDP and SCTP) by frequency   │
-│ find        Find info about about a specific service                           │
-│ sctp        Retrieve list of SCTP ports by frequency                           │
-│ stats       Retrieve stats about a port                                        │
-│ tcp         Retrieve list of TCP ports by frequency                            │
-│ udp         Retrieve list of UDP ports by frequency                            │
-│ update      Update ports list                                                  │
-╰────────────────────────────────────────────────────────────────────────────────╯
+ Usage: topmostp [OPTIONS] COMMAND [ARGS]...                                                         
+                                                                                                     
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────╮
+│ --help  -h        Show this message and exit.                                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────╮
+│ find     Find info about about a specific service                                                 │
+│ stats    Retrieve stats about a port                                                              │
+│ top      Retrieve list of ports by frequency (TCP, UDP, SCTP or all of them. Defaults to 'all')   │
+│ update   Update ports list                                                                        │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 A pratical example is the following:
 ```
-naabu -p $(topmostp all 15 --silent) -host secsi.io
+naabu -p $(topmostp top 15 -s) -host secsi.io
 ```
 
 In this snippet the output of ``topmostp`` is used to retrieve the list of the top 10 ports and it is chained with the ``naabu`` port scanning tool.
 
 
 ## Demo
-[![demo](https://asciinema.org/a/531844.svg)](https://asciinema.org/a/531844?autoplay=1)
+[![demo](https://asciinema.org/a/532210.svg)](https://asciinema.org/a/532210?autoplay=1)
 
 ## Credits
 Developed by Angelo Delicato [@SecSI](https://secsi.io)
