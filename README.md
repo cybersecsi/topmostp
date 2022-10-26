@@ -35,7 +35,7 @@ pip install topmostp
 topmostp --help
 ```
 
-This will display help for the tool. Here are all the switches it supports.
+This will display help for the tool. Here are all the commands it supports.
 
 ```
  Usage: topmostp [OPTIONS] COMMAND [ARGS]...                                                         
@@ -49,6 +49,52 @@ This will display help for the tool. Here are all the switches it supports.
 │ top      Retrieve list of ports by frequency (TCP, UDP, SCTP or all of them. Defaults to 'all')   │
 │ update   Update ports list                                                                        │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+This is the help for the ``topmostp top`` command:
+```
+ Usage: topmostp top [OPTIONS] N                                              
+                                                                              
+ Retrieve list of ports by frequency (TCP, UDP, SCTP or all of them. Defaults 
+ to 'all')                                                                    
+                                                                              
+╭─ Arguments ────────────────────────────────────────────────────────────────╮
+│ *    n      INTEGER  [default: None] [required]                            │
+╰────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────╮
+│ --type    -t      [tcp|udp|sctp|all]  [default: all]                       │
+│ --silent  -s                          Display only results in output       │
+│ --help    -h                          Show this message and exit.          │
+╰────────────────────────────────────────────────────────────────────────────╯
+```
+
+This is the help for the ``topmostp find`` command:
+```
+ Usage: topmostp find [OPTIONS] SERVICE                                       
+                                                                              
+ Find info about about a specific service                                     
+                                                                              
+╭─ Arguments ────────────────────────────────────────────────────────────────╮
+│ *    service      TEXT  [default: None] [required]                         │
+╰────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────╮
+│ --help  -h        Show this message and exit.                              │
+╰────────────────────────────────────────────────────────────────────────────╯
+```
+
+This is the help for the ``topmostp stats`` command:
+```
+ Usage: topmostp stats [OPTIONS] PORT PORT_TYPE:{tcp|udp|sctp}                
+                                                                              
+ Retrieve stats about a port                                                  
+                                                                              
+╭─ Arguments ────────────────────────────────────────────────────────────────╮
+│ *    port           INTEGER                   [default: None] [required]   │
+│ *    port_type      PORT_TYPE:{tcp|udp|sctp}  [default: None] [required]   │
+╰────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────────────────────╮
+│ --help  -h        Show this message and exit.                              │
+╰────────────────────────────────────────────────────────────────────────────╯
 ```
 
 A pratical example is the following:
