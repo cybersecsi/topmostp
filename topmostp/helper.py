@@ -8,6 +8,11 @@ import csv
 
 # Vars
 NMAP_SERVICE_SOURCE = "https://raw.githubusercontent.com/nmap/nmap/master/nmap-services" # We use the 'nmap-services' file to get the list of ports
+class TopPortsTypeArg(str, Enum):
+    tcp = "tcp"
+    udp = "udp"
+    sctp = "sctp"
+    all = "all"
 class PortTypeArg(str, Enum):
     tcp = "tcp"
     udp = "udp"
@@ -29,7 +34,7 @@ def banner():
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.6 - https://github.com/cybersecsi/topmostp
+    topmostp v0.1.7 - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):
