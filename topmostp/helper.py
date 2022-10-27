@@ -25,16 +25,16 @@ ERROR_C = '\033[91m'
 BOLD = '\033[1m'
 END_C = '\033[0m'
 
-def banner():
+def banner(version: str):
   print(
-    '''
+    f'''
     ███████╗███████╗ ██████╗███████╗██╗
     ██╔════╝██╔════╝██╔════╝██╔════╝██║
     ███████╗█████╗  ██║     ███████╗██║
     ╚════██║██╔══╝  ██║     ╚════██║██║
     ███████║███████╗╚██████╗███████║██║
     ╚══════╝╚══════╝ ╚═════╝╚══════╝╚═╝
-    topmostp v0.1.7 - https://github.com/cybersecsi/topmostp
+    topmostp v{version} - https://github.com/cybersecsi/topmostp
     ''')   
 
 def log(msg):

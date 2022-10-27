@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
+from importlib import metadata
 from typing import List # To support Python>3.5
 import typer
 import topmostp.helper as helper
 
+version = metadata.version(__package__)
 app = typer.Typer(add_completion=False, context_settings={"help_option_names": ["-h", "--help"]})
 
 def intro():
-    helper.banner()
+    helper.banner(version)
     helper.check_config_folder()
 
 @app.command()
