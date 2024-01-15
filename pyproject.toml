@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "topmostp"
-version = "0.1.8"
+version = "0.1.9"
 description = "A simple CLI tool to retrieve the N top most used ports"
 authors = ["SecSI <dev@secsi.io>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/cybersecsi/topmostp"
-packages = [{include = "topmostp"}]
+packages = [{ include = "topmostp" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
